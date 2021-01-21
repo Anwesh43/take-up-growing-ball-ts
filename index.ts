@@ -21,7 +21,7 @@ class ScaleUtil {
     }
 
     static divideScale(scale : number, i : number, n : number) : number {
-        return Math.min(1 / n, ScaleUtil.divideScale(scale, i, n)) * n 
+        return Math.min(1 / n, ScaleUtil.maxScale(scale, i, n)) * n 
     }
 
     static sinify(scale : number) : number {
@@ -53,7 +53,7 @@ class DrawingUtil {
         const sc4 : number = ScaleUtil.divideScale(scale, 3, parts)
         for (var j = 0; j < balls; j++) {
             context.save()
-            context.translate(gap / 2 + gap * j, 0)
+            context.translate(gap + gap * j * 2, 0)
             DrawingUtil.drawCircle(context, 0,  r + (h - 2 * r) * (1 - sc3), r * (sc1 - sc4))
             DrawingUtil.drawLine(context, 0, 0, 0, (h - 2 * r) * (sc2 - sc3))
             context.restore()
