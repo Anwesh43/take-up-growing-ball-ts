@@ -208,3 +208,25 @@ class TakeUpGrowingBall {
         this.curr.startUpdating(cb)
     }
 }
+
+class Renderer {
+
+    tubg : TakeUpGrowingBall = new TakeUpGrowingBall() 
+    animator : Animator = new Animator()
+
+    render(context : CanvasRenderingContext2D) {
+        this.tubg.draw(context)
+    }
+
+    handleTap(cb : Function) {
+        this.tubg.startUpdating(() => {
+            this.animator.start(() => {
+                cb()
+                this.tubg.update(() => {
+                    this.animator.stop()
+                    cb()
+                })
+            })
+        })
+    }
+}
